@@ -11,10 +11,11 @@
 
 import { useState } from "react";
 import "./Article.css";
+import defaultBanner from "../assets/banner.jpg";
 
 export default function Article({
     title,
-    banner,
+    banner = defaultBanner,
     chapters,
     datetime,
     time2read,

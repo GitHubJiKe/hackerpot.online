@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../pages/App";
 import Post from "../pages/Post";
-import Wallpaper from "../pages/Wallpaper";
 
 const router = createBrowserRouter([
     {
@@ -11,10 +10,6 @@ const router = createBrowserRouter([
     {
         path: "/post/:postId",
         element: <Post />,
-    },
-    {
-        path: "/wallpaper",
-        element: <Wallpaper />,
     },
 ]);
 

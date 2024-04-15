@@ -1,7 +1,7 @@
 import AppHeader from "../components/AppHeader";
 import Article from "../components/Article";
 import banner from "../assets/banner.jpg";
-import { articles } from "../mock";
+import articles from "../articles";
 import { useParams } from "react-router-dom";
 import "./Post.css";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ export default function Post() {
                     justifyContent: "center",
                 }}
             >
-                <Article {...article} banner={banner} />
+                <Article {...article} />
             </main>
         </div>
     );

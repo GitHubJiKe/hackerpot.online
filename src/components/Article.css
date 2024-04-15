@@ -13,7 +13,7 @@ code {
 .banner {
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: bottom;
+    background-position: center;
     background-origin: content-box;
     width: 100%;
     height: 300px;
@@ -60,10 +60,42 @@ code {
     overflow: hidden;
     line-clamp: 3;
     -webkit-line-clamp: 3;
+    white-space: pre-wrap;
+}
+.article > div {
     line-height: 3rem;
+}
+.article-full > div {
+    line-height: 3rem;
+}
+.article h3 {
+    margin: 0;
+}
+.article-full h3 {
+    margin: 0;
 }
 
 .article-full {
     height: max-content;
-    line-height: 3rem;
+    white-space: pre-wrap;
+}
+
+.article img {
+    border-radius: 1rem;
+}
+
+.article-full img {
+    border-radius: 1rem;
+}
+
+.article iframe {
+    border-radius: 1rem;
+    width: 100%;
+    height: 400px;
+}
+
+.article-full iframe {
+    border-radius: 1rem;
+    width: 100%;
+    height: 400px;
 }
