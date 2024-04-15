@@ -1,10 +1,10 @@
 .App-header {
-    padding: 12px 1rem;
+    padding: 0.6rem 1rem;
     background-color: #3d3b4f;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
+    height: 3rem;
 }
 
 .App-header-left {
@@ -18,7 +18,7 @@
 
 .App-header > .App-header-left > .App-header-title {
     color: var(--bg-white-color);
-    margin-left: 12px;
+    margin-left: 1.2rem;
     font-size: 2rem;
     font-weight: 900;
     cursor: pointer;
@@ -27,7 +27,7 @@
 .App-header-right {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 }
 
 .App-header-right > a {

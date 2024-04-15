@@ -1,22 +1,28 @@
 .porfilo {
-    border-radius: 12px;
+    border-radius: 1.2rem;
     background-color: var(--bg-white-color);
-    padding: 24px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 0.5rem;
     box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
 }
 
-.porfilo > img {
+.avatar {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 12rem;
+    height: 12rem;
 }
 
 .porfilo > label {
     font-weight: 500;
     color: var(--text-primary-color);
+}
+
+.outlinks {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }

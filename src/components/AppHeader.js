@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logo from "../assets/hackerpot.jpg";
 import "./AppHeader.css";
-import { useState } from "react";
 
 const SUN_CLASS = "light_mode",
     MOON_CLASS = "dark_mode";
@@ -9,8 +9,27 @@ const SUN_CLASS = "light_mode",
 export default function AppHeader() {
     const navigate = useNavigate();
     const [modeClass, setModeClass] = useState(SUN_CLASS);
-    const redirect = () => {
-        navigate("/");
+    const redirect = () => navigate("/");
+    const toggleMode = () => {
+        if (modeClass === MOON_CLASS) {
+            setModeClass(SUN_CLASS);
+        } else {
+            setModeClass(MOON_CLASS);
+        }
+        document.body.classList.toggle("dark-mode");
+    };
+    const gotoTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+    const commonStyle = {
+        color: modeClass === SUN_CLASS ? "#000" : "#fff",
+        position: "fixed",
+        right: 4,
+        cursor: "pointer",
+        userSelect: "none",
     };
     return (
         <header className="App-header">
@@ -20,21 +39,21 @@ export default function AppHeader() {
             </div>
             <div className="App-header-right">
                 <span
-                    className="material-symbols-outlined"
-                    onClick={() => {
-                        if (modeClass === SUN_CLASS) {
-                            setModeClass(MOON_CLASS);
-                        } else {
-                            setModeClass(SUN_CLASS);
-                        }
-                        document.body.classList.toggle("dark-mode");
-                    }}
+                    class="material-symbols-outlined"
                     style={{
-                        color: modeClass === SUN_CLASS ? "#000" : "#fff",
-                        position: "fixed",
-                        bottom: 12,
-                        right: 12,
-                        cursor: "pointer",
+                        bottom: 72,
+                        ...commonStyle,
+                    }}
+                    onClick={gotoTop}
+                >
+                    arrow_circle_up
+                </span>
+                <span
+                    className="material-symbols-outlined"
+                    onClick={toggleMode}
+                    style={{
+                        bottom: 24,
+                        ...commonStyle,
                     }}
                 >
                     {modeClass}

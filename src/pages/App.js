@@ -18,10 +18,18 @@ function App() {
                         return (
                             <div
                                 key={idx}
-                                style={{ margin: "1rem 0", textAlign: "left" }}
+                                style={{
+                                    margin: "1rem 0",
+                                    textAlign: "left",
+                                }}
                             >
                                 <Link to={`/post/${item.id}`}>
-                                    <label style={{ fontSize: "1.4rem" }}>
+                                    <label
+                                        style={{
+                                            fontSize: "1.2rem",
+                                            cursor: "pointer",
+                                        }}
+                                    >
                                         {item.title} —— {item.datetime}
                                     </label>
                                 </Link>

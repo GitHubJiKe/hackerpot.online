@@ -40,8 +40,5 @@ body {
 }
 code {
     font-family: Sans Mono, sans-serif;
-    font-size: 1.4rem;
-}
-
-@media screen and (max-width: 996px) {
+    font-size: 1rem;
 }

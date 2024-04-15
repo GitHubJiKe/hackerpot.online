@@ -2,12 +2,12 @@ const article = {
     id: "2024-04-17",
     title: "代码分享",
     time2read: "0.5 min",
-    datetime: "16/04/2024",
+    datetime: "17/04/2024",
     type: "article",
     chapters: [
         {
             title: "代码示例",
-            content: "主要是看看代码高亮的效果如何",
+            content: "<p style='color:red;'>主要是看看代码高亮的效果如何</p>",
         },
         {
             title: "simple code",
