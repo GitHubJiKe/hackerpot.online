@@ -1,0 +1,17 @@
+.App-content {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.App-content > div:nth-child(2) {
+    flex: 1;
+}
+
+@media screen and (max-width: 996px) {
+    .App-content {
+        flex-direction: column;
+    }
+}
