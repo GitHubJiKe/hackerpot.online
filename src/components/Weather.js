@@ -1,7 +1,8 @@
-import { useMount } from "react-use";
+import { useLocalStorage, useMount } from "react-use";
 import { fetchCity, fetchWeather, getGeo } from "../utils";
 import { useEffect, useState, useCallback } from "react";
 import "./Weather.css";
+import { pick } from "lodash-es";
 const showKeys = [
     ["feelsLike", "体感温度", "℃"],
     ["windDir", "风力等级"],
@@ -13,34 +14,43 @@ const showKeys = [
     ["cloud", "云量", "%"],
 ];
 export default function Weather() {
-    const [coords, setCoords] = useState(null);
-    const [w, setW] = useState(null);
-    const [c, setC] = useState(null);
-    const [show, setShow] = useState(false);
+    const [coordsLocal, setCoordsLocal] = useLocalStorage("coords", null);
+    const [cityLocal, setCityLocal] = useLocalStorage("city", null);
+    const [weatherLocal, setWeatherLocal] = useLocalStorage("weather", null);
+    const [coords, setCoords] = useState(() => coordsLocal);
+    const [w, setW] = useState(() => weatherLocal);
+    const [c, setC] = useState(() => cityLocal);
+    const [show, setShow] = useState(() => {
+        return !!w;
+    });
 
     const requestW = useCallback(async () => {
         const {
             data: { now, fxLink },
         } = await fetchWeather(coords);
         if (now) {
-            setW({ ...now, link: fxLink });
+            const _w = { ...now, link: fxLink };
+            setWeatherLocal(_w);
+            setW(_w);
         }
-    }, [coords]);
+    }, [coords, setWeatherLocal]);
 
     const requestC = useCallback(async () => {
         const {
             data: { location },
         } = await fetchCity(coords);
         if (location) {
+            setCityLocal(location[0]);
             setC(location[0]);
             setShow(true);
         }
-    }, [coords]);
+    }, [coords, setCityLocal]);
 
     useMount(async () => {
         try {
             const res = await getGeo();
             if (res) {
+                setCoordsLocal(pick(res.coords, ["latitude", "longitude"]));
                 setCoords(res.coords);
             }
         } catch (error) {
