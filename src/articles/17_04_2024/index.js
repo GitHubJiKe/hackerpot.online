@@ -1,3 +1,9 @@
+import "../../widgets/CodeBox";
+const code = `
+function hackerPot () {
+    alert('Hello Hackers!')
+}
+`;
 const article = {
     id: "2024-04-17",
     title: "代码分享 Test",
@@ -11,14 +17,7 @@ const article = {
         },
         {
             title: "simple code",
-            content: `
-<pre>
-<code>
-function hackerPot () {
-    alert('Hello Hackers!')
-}
-</code>
-</pre>`,
+            content: `<codebox-widget code="${code}"></codebox-widget>`,
         },
     ],
 };

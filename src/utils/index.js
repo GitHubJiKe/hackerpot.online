@@ -36,3 +36,25 @@ export async function fetchWeather(location) {
         )}&key=655296ba470044fc9c926b2b808721c9&lang=zh-hans&unit=m`,
     );
 }
+
+export function downloadImageByUrlAndName(url, name) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.append(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+export function removeAllSpace(content) {
+    return content.replace(/(?<=>)\s+|\s+(?=<)/g, "").trim();
+}
+
+export async function copyText(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        return Promise.resolve(true);
+    } catch (err) {
+        return Promise.resolve(false);
+    }
+}

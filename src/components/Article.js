@@ -1,17 +1,6 @@
-/**
- *
- * @param {*} param0
- * @returns
- *
- * {
- *      title:string;
- *      content:htmlString
- * }
- */
-
-import { useEffect, useState } from "react";
 import "./Article.css";
 import defaultBanner from "../assets/banner.jpg";
+import { removeAllSpace } from "../utils";
 
 export default function Article({
     title,
@@ -20,20 +9,6 @@ export default function Article({
     datetime,
     time2read,
 }) {
-    // const [articleClass, setArticleClass] = useState("article");
-    // const [qrcodeShow, setQrcodeShow] = useState(false);
-    // const readmore = () => {
-    //     if (articleClass === "article") {
-    //         setArticleClass("article-full");
-    //         setQrcodeShow(true);
-    //     } else {
-    //         setArticleClass("article");
-    //         setQrcodeShow(false);
-    //     }
-    // };
-    const getHTML = (htmlContent) => {
-        return htmlContent.replace(/(?<=>)\s+|\s+(?=<)/g, "").trim();
-    };
     return (
         <div className="Article">
             <div
@@ -65,26 +40,13 @@ export default function Article({
                                 )}
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: getHTML(item.content),
+                                        __html: removeAllSpace(item.content),
                                     }}
                                 ></div>
                             </div>
                         );
                     })}
                 </article>
-                {/* <div className="readMoreBtn">
-                    <div className="button" onClick={readmore}>
-                        {articleClass === "article" ? (
-                            <span className="material-symbols-outlined">
-                                keyboard_double_arrow_down
-                            </span>
-                        ) : (
-                            <span className="material-symbols-outlined">
-                                keyboard_double_arrow_up
-                            </span>
-                        )}
-                    </div>
-                </div> */}
             </div>
         </div>
     );

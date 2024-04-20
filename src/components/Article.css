@@ -30,6 +30,9 @@ code {
     .banner {
         height: 9rem !important;
     }
+    iframe[type="website"] {
+        display: none !important;
+    }
 }
 .content {
     padding: 1.2rem;
@@ -118,14 +121,4 @@ blockquote {
 iframe {
     outline: none;
     border: none;
-}
-
-.wallpapers {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 0.5rem;
-}
-.wallpapers img {
-    width: 100%;
 }

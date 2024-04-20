@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 import avatar from "../assets/avatar.jpg";
 import articles from "../articles";
 import Weather from "../components/Weather";
-
+const filterFun = (item) => {
+    if (window.location.href.includes("localhost")) {
+        return true;
+    } else {
+        return !item.title.toLowerCase().includes("Test");
+    }
+};
 function App() {
     return (
         <div className="App">
@@ -18,7 +24,7 @@ function App() {
                     <Weather />
                 </div>
                 <div style={{ flex: 4, textAlign: "center" }}>
-                    {articles.map((item, idx) => {
+                    {articles.filter(filterFun).map((item, idx) => {
                         return (
                             <div key={idx} className="linkcard">
                                 <Link to={`/post/${item.id}`}>
