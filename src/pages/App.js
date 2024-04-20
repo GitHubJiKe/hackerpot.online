@@ -16,13 +16,7 @@ function App() {
                 <div style={{ flex: 4, textAlign: "center" }}>
                     {articles.map((item, idx) => {
                         return (
-                            <div
-                                key={idx}
-                                style={{
-                                    margin: "1rem 0",
-                                    textAlign: "left",
-                                }}
-                            >
+                            <div key={idx} className="linkcard">
                                 <Link to={`/post/${item.id}`}>
                                     <label
                                         style={{

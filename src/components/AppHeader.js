@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/hackerpot.jpg";
 import "./AppHeader.css";
+import { useMount } from "react-use";
 
 const SUN_CLASS = "light_mode",
     MOON_CLASS = "dark_mode";
@@ -24,12 +25,28 @@ export default function AppHeader() {
             behavior: "smooth",
         });
     };
+
+    useMount(() => {
+        new window["QRCode"](
+            document.getElementById("qrcode"),
+            // eslint-disable-next-line no-restricted-globals
+            location.href,
+            {
+                width: 50,
+                height: 50,
+            },
+        );
+    });
+    const showQrCode = () => {
+        document.getElementById("qrcode").classList.toggle("hide-qrcode");
+    };
     const commonStyle = {
         color: modeClass === SUN_CLASS ? "#000" : "#fff",
         position: "fixed",
-        right: 4,
+        right: "0.5rem",
         cursor: "pointer",
         userSelect: "none",
+        zIndex: 999,
     };
     return (
         <header className="App-header">
@@ -39,9 +56,9 @@ export default function AppHeader() {
             </div>
             <div className="App-header-right">
                 <span
-                    class="material-symbols-outlined"
+                    className="material-symbols-outlined"
                     style={{
-                        bottom: 72,
+                        bottom: "50%",
                         ...commonStyle,
                     }}
                     onClick={gotoTop}
@@ -52,12 +69,27 @@ export default function AppHeader() {
                     className="material-symbols-outlined"
                     onClick={toggleMode}
                     style={{
-                        bottom: 24,
+                        bottom: "45%",
                         ...commonStyle,
                     }}
                 >
                     {modeClass}
                 </span>
+                <div
+                    style={{
+                        bottom: "55%",
+                        ...commonStyle,
+                    }}
+                >
+                    <span
+                        className="material-symbols-outlined"
+                        onClick={showQrCode}
+                        style={{ position: "relative" }}
+                    >
+                        qr_code_2
+                        <div className="qrcode hide-qrcode" id="qrcode"></div>
+                    </span>
+                </div>
                 <a
                     href="https://github.com/GitHubJiKe/hackerpot.online"
                     target="_blank"

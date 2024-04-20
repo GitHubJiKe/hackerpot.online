@@ -5,7 +5,9 @@
     width: 100%;
     max-width: 45rem;
     background-color: var(--bg-color-article-light);
+    position: relative;
 }
+
 pre,
 code {
     border-radius: 1.2rem;
@@ -23,7 +25,7 @@ code {
     border-top-left-radius: 1.2rem;
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 500px) {
     .banner {
         height: 9rem !important;
     }
@@ -51,12 +53,12 @@ code {
     border: none;
     background-color: var(--text-primary-color);
     color: var(--bg-white-color);
-    padding: 1rem 2rem;
+    padding: 0.4rem;
     border-radius: 1rem;
     font-weight: 600;
-    width: 8rem;
     cursor: pointer;
     display: inline-block;
+    width: 6rem;
 }
 
 .article {

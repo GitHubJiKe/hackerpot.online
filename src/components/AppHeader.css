@@ -33,3 +33,22 @@
 .App-header-right > a {
     color: var(--bg-white-color);
 }
+.qrcode {
+    display: inline-block;
+    position: absolute;
+    right: 2rem;
+    top: -2rem;
+}
+.qrcode::after {
+    content: "扫码手机查看";
+    font-size: 1rem;
+}
+.qrcode img {
+    width: 6rem;
+    height: 6rem;
+    border: 0.4rem solid #fff;
+    border-radius: 0.5rem;
+}
+.hide-qrcode {
+    display: none;
+}

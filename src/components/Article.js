@@ -9,7 +9,7 @@
  * }
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Article.css";
 import defaultBanner from "../assets/banner.jpg";
 
@@ -20,15 +20,18 @@ export default function Article({
     datetime,
     time2read,
 }) {
-    const [articleClass, setArticleClass] = useState("article");
+    // const [articleClass, setArticleClass] = useState("article");
+    // const [qrcodeShow, setQrcodeShow] = useState(false);
+    // const readmore = () => {
+    //     if (articleClass === "article") {
+    //         setArticleClass("article-full");
+    //         setQrcodeShow(true);
+    //     } else {
+    //         setArticleClass("article");
+    //         setQrcodeShow(false);
+    //     }
+    // };
 
-    const readmore = () => {
-        if (articleClass === "article") {
-            setArticleClass("article-full");
-        } else {
-            setArticleClass("article");
-        }
-    };
     return (
         <div className="Article">
             <div
@@ -49,7 +52,7 @@ export default function Article({
                     </div>
                 </div>
                 <h2 style={{ textAlign: "center" }}>{title}</h2>
-                <article className={articleClass}>
+                <article className={"article-full"}>
                     {chapters.map((item, idx) => {
                         return (
                             <div key={idx}>
@@ -63,7 +66,7 @@ export default function Article({
                         );
                     })}
                 </article>
-                <div className="readMoreBtn">
+                {/* <div className="readMoreBtn">
                     <div className="button" onClick={readmore}>
                         {articleClass === "article" ? (
                             <span className="material-symbols-outlined">
@@ -75,7 +78,7 @@ export default function Article({
                             </span>
                         )}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
