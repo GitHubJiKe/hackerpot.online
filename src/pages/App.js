@@ -8,7 +8,7 @@ import avatar from "../assets/avatar.jpg";
 import articles from "../articles";
 import Weather from "../components/Weather";
 const filterFun = (item) => {
-    if (window.location.href.includes("localhost")) {
+    if (window.location.origin.includes("localhost")) {
         return true;
     } else {
         return !item.title.toLowerCase().includes("Test");

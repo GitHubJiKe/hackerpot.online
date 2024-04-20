@@ -1,9 +1,6 @@
-import hljs from "highlight.js/lib/core";
-import javascript from "highlight.js/lib/languages/javascript";
-import "highlight.js/styles/atom-one-dark.min.css";
-import { removeAllSpace, copyText } from "../utils";
-// import "highlight.js/styles/atom-one-light.min.css";
+import { copyText } from "../utils";
 import copyIcon from "./copy.svg";
+import { codeToHtml } from "shiki";
 
 class CodeBoxWidget extends HTMLElement {
     constructor() {
@@ -35,28 +32,36 @@ class CodeBoxWidget extends HTMLElement {
         `;
         shadow.appendChild(style);
 
-        const code = document.createElement("code");
-        const codeContent = removeAllSpace(this.getAttribute("code"));
-        code.textContent = codeContent;
+        const code = document.createElement("div");
+        const codeContent = this.getAttribute("code");
+        const lang = this.getAttribute("lang");
+        codeToHtml(codeContent, {
+            theme: "material-theme-darker",
+            lang: lang || "javascript",
+            decorations: [
+                {
+                    // line 和 character 都是从 0 开始索引的
+                    start: { line: 1, character: 0 },
+                    end: { line: 1, character: 11 },
+                    properties: { class: "highlighted-word" },
+                },
+            ],
+        }).then((html) => {
+            code.innerHTML = html;
 
-        const pre = document.createElement("pre");
-        pre.appendChild(code);
-        const copy = document.createElement("img");
-        copy.src = copyIcon;
-        copy.addEventListener("click", async () => {
-            if (await copyText(codeContent)) {
-                alert("复制成功");
-            } else {
-                alert("复制失败");
-            }
+            const copy = document.createElement("img");
+            copy.src = copyIcon;
+            copy.title = "复制";
+            copy.addEventListener("click", async () => {
+                if (await copyText(codeContent)) {
+                    alert("复制成功");
+                } else {
+                    alert("复制失败");
+                }
+            });
+            shadow.appendChild(copy);
+            shadow.appendChild(code);
         });
-        shadow.appendChild(copy);
-        shadow.appendChild(pre);
-    }
-
-    connectedCallback() {
-        hljs.registerLanguage("javascript", javascript);
-        hljs.highlightElement(this.shadowRoot.querySelector("pre"));
     }
 }
 
