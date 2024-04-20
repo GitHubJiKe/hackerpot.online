@@ -1,6 +1,6 @@
 const article = {
     id: "2024-04-19",
-    title: "The Old Man and the sea",
+    title: "The Old Man and the sea 测试",
     time2read: "5 min",
     datetime: "19/04/2024",
     type: "article",

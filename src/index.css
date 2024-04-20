@@ -6,6 +6,7 @@
     --text-color-dark: #fff;
     --bg-color-article-dark: #3d3b4f;
     --bg-color-article-light: #e0f0e9;
+    --quote-border-color: #14b8a6;
 }
 
 @font-face {
@@ -23,7 +24,7 @@ body {
     color: var(--text-primary-color);
     height: 100dvh;
     font-weight: 500;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--text-color-light); /* Default text color */
     transition: background-color var(--transition-speed),
         color var(--transition-speed); /* Smooth transition */

@@ -5,7 +5,7 @@ import david from "./david.jpeg";
 import greenman from "./greenman.jpeg";
 const article = {
     id: "2024-04-15",
-    title: "壁纸分享",
+    title: "壁纸分享 Test",
     time2read: "1 min",
     datetime: "15/04/2024",
     type: "wallpaper",

@@ -80,6 +80,7 @@ export default function AppHeader() {
                         bottom: "55%",
                         ...commonStyle,
                     }}
+                    className="qrcode-box"
                 >
                     <span
                         className="material-symbols-outlined"

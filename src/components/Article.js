@@ -31,7 +31,9 @@ export default function Article({
     //         setQrcodeShow(false);
     //     }
     // };
-
+    const getHTML = (htmlContent) => {
+        return htmlContent.replace(/(?<=>)\s+|\s+(?=<)/g, "").trim();
+    };
     return (
         <div className="Article">
             <div
@@ -56,10 +58,14 @@ export default function Article({
                     {chapters.map((item, idx) => {
                         return (
                             <div key={idx}>
-                                {item.title && <h3>{item.title}</h3>}
+                                {item.title && (
+                                    <h3 style={{ padding: "1rem 0" }}>
+                                        {item.title}
+                                    </h3>
+                                )}
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: item.content,
+                                        __html: getHTML(item.content),
                                     }}
                                 ></div>
                             </div>

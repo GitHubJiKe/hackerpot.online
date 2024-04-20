@@ -1,6 +1,6 @@
 const article = {
     id: "2024-04-16",
-    title: "视频分享",
+    title: "视频分享 Test",
     time2read: "25.5 min",
     datetime: "16/04/2024",
     type: "video",

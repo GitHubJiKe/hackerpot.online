@@ -6,6 +6,7 @@
     max-width: 45rem;
     background-color: var(--bg-color-article-light);
     position: relative;
+    margin: 1rem 0;
 }
 
 pre,
@@ -85,6 +86,7 @@ code {
 .article-full {
     height: max-content;
     white-space: pre-wrap;
+    letter-spacing: 0.2rem;
 }
 
 .article img {
@@ -105,4 +107,25 @@ code {
     border-radius: 1rem;
     width: 100%;
     height: 20rem;
+}
+
+blockquote {
+    border-left: 0.5rem solid var(--quote-border-color);
+    padding-left: 0.5rem;
+    border-radius: 0.2rem;
+}
+
+iframe {
+    outline: none;
+    border: none;
+}
+
+.wallpapers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+.wallpapers img {
+    width: 100%;
 }
