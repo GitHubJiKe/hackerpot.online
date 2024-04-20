@@ -10,4 +10,17 @@
     text-align: left;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
+}
+
+.widgets {
+    flex: 3;
+    display: flex;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+    .widgets {
+        flex-direction: column;
+    }
 }
