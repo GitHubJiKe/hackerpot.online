@@ -10,31 +10,45 @@
 
 .w-icon {
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 2rem 0;
     position: relative;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .icon {
     position: relative;
 }
 
-.icon::after {
-    content: attr(data-text);
-    font-size: 2rem;
-}
-
 .temp {
     font-size: 4rem;
-    position: relative;
-    top: -1rem;
-    left: -2rem;
     font-weight: 700;
 }
 .temp::after {
     content: "℃";
     font-size: 2rem;
+}
+.w-infos {
+    display: flex;
+    flex-direction: column;
+}
+.w-infos .text {
+    font-size: 1.5rem;
+}
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+.refreshW {
+    color: var(--quote-border-color);
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg); /* 从 0 度开始旋转 */
+    }
+    to {
+        transform: rotate(360deg); /* 旋转到 360 度 */
+    }
 }
 .infos {
     display: grid;
