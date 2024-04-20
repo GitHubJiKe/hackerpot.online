@@ -22,17 +22,14 @@
 
 .icon::after {
     content: attr(data-text);
-    display: block;
     font-size: 2rem;
-    position: absolute;
-    right: -2rem;
-    top: 4rem;
 }
 
 .temp {
     font-size: 4rem;
     position: relative;
     top: -1rem;
+    left: -2rem;
     font-weight: 700;
 }
 .temp::after {
