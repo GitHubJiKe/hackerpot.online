@@ -27,7 +27,6 @@
 .App-header-right {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
 }
 
 .App-header-right > a {

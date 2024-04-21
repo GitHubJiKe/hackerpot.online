@@ -1,20 +1,20 @@
 .porfilo {
-    border-radius: 1.2rem;
-    background-color: var(--bg-white-color);
-    padding: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
-    flex: 2;
+    flex-direction: column;
+}
+
+.flex-clo {
+    display: flex;
+    flex-direction: column;
 }
 
 .avatar {
-    border-radius: 50%;
-    width: 12rem;
-    height: 12rem;
+    width: 6rem;
+    height: 6rem;
+    border: 1px solid #eee;
 }
 
 .porfilo > label {
