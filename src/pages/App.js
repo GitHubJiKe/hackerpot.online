@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import avatar from "../assets/avatar.jpg";
 import articles from "../articles";
 import Weather from "../components/Weather";
+import { useTitle } from "react-use";
 const filterFun = (item) => {
     if (window.location.origin.includes("localhost")) {
         return true;
@@ -15,6 +16,7 @@ const filterFun = (item) => {
     }
 };
 function App() {
+    useTitle("骇客地锅");
     return (
         <div className="App">
             <AppHeader />
