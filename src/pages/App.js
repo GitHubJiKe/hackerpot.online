@@ -11,7 +11,7 @@ const filterFun = (item) => {
     if (window.location.origin.includes("localhost")) {
         return true;
     } else {
-        return !item.title.toLowerCase().includes("Test");
+        return !item.title.toLowerCase().includes("test");
     }
 };
 function App() {

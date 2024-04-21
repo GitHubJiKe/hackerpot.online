@@ -16,31 +16,41 @@ class CodeBoxWidget extends HTMLElement {
         const style = document.createElement("style");
         style.textContent = `
         pre{
-            font-family: monospace, sans-serif;
             border-radius:1rem;
-            padding:0.6rem 1.2rem;
+        }
+        code{
+            font-family: monospace, sans-serif;
             font-size: 0.8rem;
             letter-spacing:0;
+            padding:2rem 1.2rem;
+            overflow:auto;
+            display:block;
         }
         img{
             cursor:pointer;
-            float:right;
-            position:relative;
+            position:absolute;
             right:0.5rem;
             top:0.5rem;
+        }
+        #lang{
+            position:absolute;
+            left:0.5rem;
+            top:0.5rem;
+            color:#fff;
         }
         `;
         shadow.appendChild(style);
 
         const code = document.createElement("div");
+        code.style.position = "relative";
         const codeContent = this.getAttribute("code");
         const lang = this.getAttribute("lang");
+        const _lang = lang || "javascript";
         codeToHtml(codeContent, {
-            theme: "material-theme-darker",
-            lang: lang || "javascript",
+            theme: "tokyo-night",
+            lang: _lang,
             decorations: [
                 {
-                    // line 和 character 都是从 0 开始索引的
                     start: { line: 1, character: 0 },
                     end: { line: 1, character: 11 },
                     properties: { class: "highlighted-word" },
@@ -50,6 +60,9 @@ class CodeBoxWidget extends HTMLElement {
             code.innerHTML = html;
 
             const copy = document.createElement("img");
+            const lang = document.createElement("span");
+            lang.textContent = _lang;
+            lang.id = "lang";
             copy.src = copyIcon;
             copy.title = "复制";
             copy.addEventListener("click", async () => {
@@ -59,7 +72,8 @@ class CodeBoxWidget extends HTMLElement {
                     alert("复制失败");
                 }
             });
-            shadow.appendChild(copy);
+            code.appendChild(copy);
+            code.appendChild(lang);
             shadow.appendChild(code);
         });
     }
