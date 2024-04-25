@@ -2,29 +2,29 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # 或者你的默认分支名称
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'  # 选择一个适合你项目的Node.js版本
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'  # 使用项目所需的Node.js版本
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      run: npm install
 
-      - name: Build Project
-        run: npm run build
+    - name: Build Project
+      run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build  # create-react-app的默认构建目录
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages  # 部署到gh-pages分支
+        folder: build      # create-react-app生成的生产文件夹
+        token: ${{ secrets.GITHUB_TOKEN }}  # 使用GitHub提供的token
