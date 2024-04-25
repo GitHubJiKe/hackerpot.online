@@ -1,6 +1,6 @@
 import AppHeader from "../components/AppHeader";
 import Article from "../components/Article";
-import articles from "../articles";
+import { articles } from "../articles";
 import { useParams } from "react-router-dom";
 import "./Post.css";
 import { useTitle } from "react-use";

@@ -7,7 +7,7 @@ import article_20_04_2024 from "./20_04_2024";
 import article_2_20_04_2024 from "./2_20_04_2024";
 import article_21_04_2024 from "./21_04_2024";
 
-export default [
+export const articles = [
     article_15_04_2024,
     article_16_04_2024,
     article_17_04_2024,

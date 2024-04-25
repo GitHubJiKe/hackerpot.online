@@ -1,10 +1,9 @@
 import "./App.css";
 import AppContent from "../components/AppContent";
 import AppHeader from "../components/AppHeader";
-import Porfilo from "../components/Porfilo";
 import { Link } from "react-router-dom";
 
-import articles from "../articles";
+import { articles } from "../articles";
 import Weather from "../components/Weather";
 import { useTitle } from "react-use";
 const filterFun = (item) => {

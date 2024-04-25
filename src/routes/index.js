@@ -1,15 +1,25 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "../pages/App";
-import Post from "../pages/Post";
+import { lazy, Suspense } from "react";
+import Waitting from "../components/Waitting";
+const App = lazy(() => import("../pages/App"));
+const Post = lazy(() => import("../pages/Post"));
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: (
+            <Suspense fallback={<Waitting />}>
+                <App />
+            </Suspense>
+        ),
     },
     {
         path: "/post/:postId",
-        element: <Post />,
+        element: (
+            <Suspense fallback={<Waitting />}>
+                <Post />
+            </Suspense>
+        ),
     },
 ]);
 
