@@ -28,15 +28,15 @@ export default function Article({
                         <label className="timevalue">{datetime}</label>
                     </div>
                 </div>
-                <h2 style={{ textAlign: "center" }}>{title}</h2>
-                <article className={"article-full"}>
+                <h2 style={{ textAlign: "center" }} id={title}>
+                    {title}
+                </h2>
+                <div className={"article-full"}>
                     {chapters.map((item, idx) => {
                         return (
                             <div key={idx}>
                                 {item.title && (
-                                    <h3 style={{ padding: "1rem 0" }}>
-                                        {item.title}
-                                    </h3>
+                                    <h3 id={item.title}>{item.title}</h3>
                                 )}
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -46,7 +46,7 @@ export default function Article({
                             </div>
                         );
                     })}
-                </article>
+                </div>
             </div>
         </div>
     );

@@ -31,7 +31,7 @@ code {
         height: 9rem !important;
     }
     iframe[type="website"] {
-        display: none !important;
+        /* display: none !important; */
     }
 }
 .content {
@@ -79,13 +79,13 @@ code {
 .article-full > div {
     line-height: 2rem;
 }
-.article h3 {
-    margin: 0;
-}
-.article-full h3 {
-    margin: 0;
-}
 
+h3 {
+    border-bottom: 0.2rem solid #14b8a6;
+    padding: 1rem 0 0.4rem 0;
+    margin-bottom: 0.5rem;
+    font-size: larger;
+}
 .article-full {
     height: max-content;
     white-space: pre-wrap;
@@ -121,4 +121,9 @@ blockquote {
 iframe {
     outline: none;
     border: none;
+    background-color: #fff;
+}
+
+a {
+    color: #0ea5e9;
 }

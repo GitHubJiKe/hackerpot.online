@@ -62,6 +62,7 @@ class CodeBoxWidget extends HTMLElement {
             const copy = document.createElement("img");
             const lang = document.createElement("span");
             lang.textContent = _lang;
+            lang.style.fontSize = "0.8rem";
             lang.id = "lang";
             copy.src = copyIcon;
             copy.title = "复制";

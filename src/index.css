@@ -9,21 +9,14 @@
     --quote-border-color: #14b8a6;
 }
 
-@font-face {
-    font-family: "qiantumark";
-    src: url(./fonts/千图马克手写体.ttf) format("truetype");
-}
 body {
     margin: 0;
-    font-family: "Josefin Sans", "qiantumark", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg-color-light);
     color: var(--text-primary-color);
-    height: 100dvh;
-    font-weight: 500;
     font-size: 1.2rem;
     color: var(--text-color-light); /* Default text color */
     transition: background-color var(--transition-speed),
@@ -38,4 +31,22 @@ body {
 }
 .dark-mode .Article {
     background-color: var(--bg-color-article-dark);
+}
+
+.inline-code {
+    color: #14b8a6 !important;
+    white-space: nowrap;
+}
+
+.inline-highlight {
+    color: #f43f5e;
+    font-weight: 600;
+}
+
+blockquote {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode blockquote {
+    color: rgba(255, 255, 255, 0.5);
 }

@@ -1,0 +1,15 @@
+.catalog {
+    position: fixed;
+    height: auto;
+    top: 10%;
+    left: 2%;
+}
+.catalog a {
+    display: block;
+}
+
+@media screen and (max-width: 500px) {
+    .catalog {
+        display: none;
+    }
+}

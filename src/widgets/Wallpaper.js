@@ -38,7 +38,6 @@ class WallpaperWidget extends HTMLElement {
         .wallpapers {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
             gap: 0.5rem;
         }
    
@@ -49,6 +48,14 @@ class WallpaperWidget extends HTMLElement {
             cursor:pointer;
             right: 0.5rem;
             top: 0.5rem;
+        }
+
+        @media screen and (max-width: 500px) {
+            .wallpapers {
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                gap: 0.5rem;
+            }
         }
         `;
 
