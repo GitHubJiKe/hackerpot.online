@@ -1,0 +1,9 @@
+.quote {
+    display: flex;
+}
+.displayPane {
+    flex: 8;
+}
+.operatePane {
+    flex: 4;
+}
