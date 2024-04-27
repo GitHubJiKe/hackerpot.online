@@ -1,4 +1,5 @@
 import axios from "axios";
+import fileSaver from "file-saver";
 
 export async function getGeo() {
     return new Promise((resolve, reject) => {
@@ -38,12 +39,7 @@ export async function fetchWeather(location) {
 }
 
 export function downloadImageByUrlAndName(url, name) {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = name;
-    document.body.append(a);
-    a.click();
-    document.body.removeChild(a);
+    fileSaver.saveAs(url, name);
 }
 
 export function removeAllSpace(content) {

@@ -1,4 +1,3 @@
-import { copyText } from "../utils";
 import copyIcon from "./copy.svg";
 import { codeToHtml } from "shiki";
 
@@ -8,10 +7,14 @@ class CodeBoxWidget extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
 
         const link = document.createElement("link");
+        const script = document.createElement("script");
+        script.src =
+            "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js";
         link.rel = "stylesheet";
         link.href =
             "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css";
         shadow.appendChild(link);
+        shadow.appendChild(script);
 
         const style = document.createElement("style");
         style.textContent = `
@@ -60,22 +63,28 @@ class CodeBoxWidget extends HTMLElement {
             code.innerHTML = html;
 
             const copy = document.createElement("img");
+            const codeEle = code.querySelector("code");
+            codeEle.id = "codeBox";
             const lang = document.createElement("span");
             lang.textContent = _lang;
             lang.style.fontSize = "0.8rem";
             lang.id = "lang";
             copy.src = copyIcon;
+            copy.classList.add("copyBtn");
             copy.title = "复制";
-            copy.addEventListener("click", async () => {
-                if (await copyText(codeContent)) {
-                    alert("复制成功");
-                } else {
-                    alert("复制失败");
-                }
-            });
             code.appendChild(copy);
             code.appendChild(lang);
             shadow.appendChild(code);
+            // eslint-disable-next-line no-undef
+            const clipboard = new ClipboardJS(copy, { target: () => codeEle });
+            clipboard.on("success", function (e) {
+                alert("复制成功");
+                e.clearSelection();
+            });
+
+            clipboard.on("error", function (e) {
+                alert("复制失败");
+            });
         });
     }
 }

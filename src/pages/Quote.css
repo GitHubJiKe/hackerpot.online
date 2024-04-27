@@ -1,9 +1,61 @@
 .quote {
     display: flex;
+    min-width: 800px;
+    height: 100dvh;
 }
 .displayPane {
     flex: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.arrows {
+    display: flex;
+    gap: 4rem;
+    width: 100%;
+    justify-content: center;
+    margin: 2rem;
+}
+.arrows span {
+    cursor: pointer;
+}
+.quoteContentBox {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box;
+    background-position: center;
+    width: 80%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.slogn {
+    position: absolute;
+    bottom: 0.2rem;
+    right: 0.5rem;
+    font-weight: 900;
+    font-size: 0.8rem;
+    color: #9f1239;
+}
+.quoteContent {
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 0.5rem solid rgba(255, 255, 255, 0.8);
+    border-radius: 0.2rem;
+    margin: 4rem 2rem;
+    padding: 2rem;
+    font-family: "Josefin Sans", "qiantumark", sans-serif;
 }
 .operatePane {
+    border-left: 0.1rem solid #eee;
     flex: 4;
+}
+.inputBox {
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    width: 100%;
 }

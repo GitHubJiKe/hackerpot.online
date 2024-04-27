@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import "./Post.css";
 import { useMount, useTitle } from "react-use";
 import { createRoot } from "react-dom/client";
+import { useEffect } from "react";
 
 function useAnchors(titles) {
     useMount(() => {
@@ -26,6 +27,14 @@ export default function Post() {
     const titles = article.chapters.map((c) => c.title);
     titles.unshift(article.title);
     useAnchors(titles);
+    useEffect(() => {
+        return () => {
+            const mountPoint = document.body.querySelector(".catalog");
+            if (mountPoint) {
+                document.body.removeChild(mountPoint);
+            }
+        };
+    }, []);
     return (
         <div className="Post">
             <AppHeader />

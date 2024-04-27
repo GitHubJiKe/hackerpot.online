@@ -8,7 +8,10 @@
     --bg-color-article-light: #e0f0e9;
     --quote-border-color: #14b8a6;
 }
-
+@font-face {
+    font-family: "qiantumark";
+    src: url(./fonts/千图马克手写体.ttf) format("truetype");
+}
 body {
     margin: 0;
     font-optical-sizing: auto;
