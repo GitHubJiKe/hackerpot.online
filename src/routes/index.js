@@ -6,41 +6,28 @@ const Post = lazy(() => import("../pages/Post"));
 const Tools = lazy(() => import("../pages/Tools"));
 const Quote = lazy(() => import("../pages/Quote"));
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <Suspense fallback={<Waitting />}>
-                <App />
-            </Suspense>
-        ),
-    },
-    {
-        path: "/post/:postId",
-        element: (
-            <Suspense fallback={<Waitting />}>
-                <Post />
-            </Suspense>
-        ),
-    },
-    {
-        path: "/tools",
-        element: (
-            <Suspense fallback={<Waitting />}>
-                <Tools />
-            </Suspense>
-        ),
-    },
-    {
-        path: "/quote",
-        element: (
-            <Suspense fallback={<Waitting />}>
-                <Quote />
-            </Suspense>
-        ),
-    },
-]);
+
+// 定义一个高阶组件来封装 Suspense 逻辑
+const withSuspense = (Component) => (props) => (
+    <Suspense fallback={<Waitting />}>
+        <Component {...props} />
+    </Suspense>
+);
+
+// 使用高阶组件包装组件
+const routes = [
+    { path: "/", element: withSuspense(App) },
+    { path: "/post/:postId", element: withSuspense(Post) },
+    { path: "/tools", element: withSuspense(Tools) },
+    { path: "/quote", element: withSuspense(Quote) },
+];
+
+const router = createBrowserRouter(routes.map(route => ({
+    ...route,
+    element: <route.element />,
+})));
 
 export default function Router() {
     return <RouterProvider router={router} />;
 }
+

@@ -3,22 +3,16 @@ import fileSaver from "file-saver";
 import { useEffect } from 'react'
 
 
-export async function getGeo() {
-    return new Promise((resolve, reject) => {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    resolve(position);
-                },
-                (error) => {
-                    reject(error);
-                },
-            );
-        } else {
-            reject(new Error("your browser not support geo feature"));
+export const getGeo = () =>
+    new Promise((resolve, reject) => {
+        if (!("geolocation" in navigator)) {
+            reject(new Error("Your browser does not support geolocation."));
+            return;
         }
+
+        navigator.geolocation.getCurrentPosition(resolve, reject);
     });
-}
+
 
 function getLocationStr({ latitude, longitude }) {
     return `${longitude.toString().replace(/-/g, "")},${latitude}`;
@@ -49,41 +43,45 @@ export function removeAllSpace(content) {
 }
 
 export async function copyText(text) {
+    if (!navigator.clipboard) {
+        return false;
+    }
     try {
         await navigator.clipboard.writeText(text);
-        return Promise.resolve(true);
+        return true;
     } catch (err) {
-        return Promise.resolve(false);
+        return false;
     }
 }
 
 
-export function useComment() {
-    // <script src="https://utteranc.es/client.js" repo="GitHubJiKe/hackerpot-comments" issue-term="pathname"
-    // theme="preferred-color-scheme" crossorigin="anonymous" async>
-    // </script>
-    useEffect(() => {
-        if (document.body.querySelector('#comment')) {
-            return;
-        }
-        const script = document.createElement('script')
-        script.id = 'comment'
-        script.src = 'https://utteranc.es/client.js'
-        script.crossOrigin = 'anonymous'
-        script.setAttribute('repo', 'GitHubJiKe/hackerpot-comments')
-        script.setAttribute('issue-term', 'pathname')
-        script.setAttribute('theme', 'preferred-color-scheme')
-        script.setAttribute('async', 'true')
-        document.body.appendChild(script)
-        return () => {
-            if (script && script.parentElement) {
-                script.parentElement.removeChild(script)
-            }
-            const commentBox = document.body.querySelector('.utterances')
-            if (commentBox) {
-                document.body.removeChild(commentBox)
-            }
-        }
-    }, [])
 
+
+export function useComment() {
+    useEffect(() => {
+        const commentId = '#comment';
+        const existingScript = document.body.querySelector(commentId);
+
+        if (existingScript) return;
+
+        const scriptAttributes = {
+            id: 'comment',
+            src: 'https://utteranc.es/client.js',
+            crossOrigin: 'anonymous',
+            repo: 'GitHubJiKe/hackerpot-comments',
+            'issue-term': 'pathname',
+            theme: 'preferred-color-scheme',
+            async: 'true',
+        };
+
+        const script = document.createElement('script');
+        Object.entries(scriptAttributes).forEach(([key, value]) => script.setAttribute(key, value));
+        document.body.appendChild(script);
+
+        return () => {
+            script.remove();
+            const commentBox = document.body.querySelector('.utterances');
+            commentBox?.remove();
+        };
+    }, []);
 }

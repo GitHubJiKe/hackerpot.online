@@ -2,50 +2,40 @@ import "./Article.css";
 import defaultBanner from "../assets/banner.jpg";
 import { removeAllSpace } from "../utils";
 
-export default function Article({
-    title,
-    banner = defaultBanner,
-    chapters,
-    datetime,
-    time2read,
-}) {
+const Banner = ({ banner }) => (
+    <div className="banner" style={{ backgroundImage: `url(${banner})` }}></div>
+);
+
+const TimeInfo = ({ icon, label }) => (
+    <div>
+        <span className="material-symbols-outlined">{icon}</span>
+        <label className="timevalue">{label}</label>
+    </div>
+);
+
+const Chapter = ({ title, content }) => (
+    <div>
+        {title && <h3 id={title}>{title}</h3>}
+        <div dangerouslySetInnerHTML={{ __html: removeAllSpace(content) }}></div>
+    </div>
+);
+
+export default function Article({ title, banner = defaultBanner, chapters, datetime, time2read }) {
     return (
         <div className="Article">
-            <div
-                className="banner"
-                style={{ backgroundImage: `url(${banner})` }}
-            ></div>
+            <Banner banner={banner} />
             <div className="content">
                 <div className="time">
-                    <div>
-                        <span className="material-symbols-outlined">timer</span>
-                        <label className="timevalue">{time2read}</label>
-                    </div>
-                    <div>
-                        <span className="material-symbols-outlined">
-                            calendar_month
-                        </span>
-                        <label className="timevalue">{datetime}</label>
-                    </div>
+                    <TimeInfo icon="timer" label={time2read} />
+                    <TimeInfo icon="calendar_month" label={datetime} />
                 </div>
                 <h2 style={{ textAlign: "center" }} id={title}>
                     {title}
                 </h2>
-                <div className={"article-full"}>
-                    {chapters.map((item, idx) => {
-                        return (
-                            <div key={idx}>
-                                {item.title && (
-                                    <h3 id={item.title}>{item.title}</h3>
-                                )}
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: removeAllSpace(item.content),
-                                    }}
-                                ></div>
-                            </div>
-                        );
-                    })}
+                <div className="article-full">
+                    {chapters.map((item, idx) => (
+                        <Chapter key={idx} title={item.title} content={item.content} />
+                    ))}
                 </div>
             </div>
         </div>

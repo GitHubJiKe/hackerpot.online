@@ -1,32 +1,17 @@
 import "./App.css";
+import { Link } from "react-router-dom";
+import { useTitle } from "react-use";
 import AppContent from "../components/AppContent";
 import AppHeader from "../components/AppHeader";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-
-import { articles } from "../articles";
 import Weather from "../components/Weather";
-import { useTitle } from "react-use";
+import { articles } from "../articles";
 
-const filterFun = (item) => {
-    if (window.location.origin.includes("localhost")) {
-        return true;
-    } else {
-        return !item.title.toLowerCase().includes("test");
-    }
-};
-function App() {
+const isLocalhost = () => window.location.origin.includes("localhost");
+const shouldDisplayArticle = (item) => isLocalhost() || !item.title.toLowerCase().includes("test");
+
+export default function App() {
     useTitle("骇客地锅");
-    useEffect(() => {
-        const comment = document.body.querySelector('.utterances')
-        if (comment) {
-            comment.style.display = 'none'
-        }
 
-        return () => {
-            comment && (comment.style.display = '');
-        }
-    }, [])
     return (
         <div className="App">
             <AppHeader />
@@ -35,7 +20,7 @@ function App() {
                     <Weather />
                 </div>
                 <div style={{ flex: 4, textAlign: "center" }}>
-                    {articles.filter(filterFun).map((item, idx) => {
+                    {articles.filter(shouldDisplayArticle).map((item, idx) => {
                         return (
                             <div key={idx} className="linkcard">
                                 <Link to={`/post/${item.id}`}>
@@ -56,5 +41,3 @@ function App() {
         </div>
     );
 }
-
-export default App;

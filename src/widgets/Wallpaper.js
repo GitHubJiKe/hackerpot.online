@@ -1,33 +1,44 @@
+import React from "react";
 import { createRoot } from "react-dom/client";
-import download from "./download.svg";
+import downloadIcon from "./download.svg";
 import { downloadImageByUrlAndName } from "../utils";
 
-function Wallpaper({ images }) {
-    const onDownload = (item, idx) => {
-        downloadImageByUrlAndName(item, "wallpaper_" + idx + ".png");
-    };
+const DownloadButton = ({ onClick }) => (
+    <img
+        src={downloadIcon}
+        alt="download"
+        className="download"
+        onClick={onClick}
+        style={{
+            width: "2rem",
+            height: "2rem",
+            position: "absolute",
+            cursor: "pointer",
+            right: "0.5rem",
+            top: "0.5rem",
+        }}
+    />
+);
 
-    return (
-        <div className="wallpapers">
-            {images.map((item, idx) => (
-                <div key={idx} className="img" style={{ position: "relative" }}>
-                    <img
-                        src={item}
-                        alt={`wallpaper_${idx}`}
-                        width={"100%"}
-                        style={{ borderRadius: "1rem" }}
-                    />
-                    <img
-                        src={download}
-                        alt="download"
-                        className="download"
-                        onClick={() => onDownload(item, idx)}
-                    />
-                </div>
-            ))}
-        </div>
-    );
-}
+const WallpaperImage = ({ src, alt, onDownload }) => (
+    <div className="img" style={{ position: "relative" }}>
+        <img src={src} alt={alt} width={"100%"} style={{ borderRadius: "1rem" }} />
+        <DownloadButton onClick={onDownload} />
+    </div>
+);
+
+const Wallpapers = ({ images }) => (
+    <div className="wallpapers">
+        {images.map((item, idx) => (
+            <WallpaperImage
+                key={idx}
+                src={item}
+                alt={`wallpaper_${idx}`}
+                onDownload={() => downloadImageByUrlAndName(item, `wallpaper_${idx}.png`)}
+            />
+        ))}
+    </div>
+);
 
 class WallpaperWidget extends HTMLElement {
     connectedCallback() {
@@ -35,34 +46,22 @@ class WallpaperWidget extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         const style = document.createElement("style");
         style.textContent = `
-        .wallpapers {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-        }
-   
-        .download {
-            width:2rem !important;
-            height:2rem;
-            position:absolute;
-            cursor:pointer;
-            right: 0.5rem;
-            top: 0.5rem;
-        }
-
-        @media screen and (max-width: 500px) {
             .wallpapers {
                 display: grid;
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
                 gap: 0.5rem;
             }
-        }
+            @media screen and (max-width: 500px) {
+                .wallpapers {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+            }
         `;
 
         shadow.appendChild(style);
         shadow.appendChild(mountPoint);
         const images = this.getAttribute("images").split(",");
-        createRoot(mountPoint).render(<Wallpaper images={images} />);
+        createRoot(mountPoint).render(<Wallpapers images={images} />);
     }
 }
 

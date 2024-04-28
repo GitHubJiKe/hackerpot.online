@@ -15,35 +15,24 @@ export default function AppHeader() {
     const [modeClass, setModeClass] = useState(SUN_CLASS);
     const redirect = () => navigate("/");
     const [opened, setOpen] = useToggle(false);
+
     const toggleMode = () => {
-        if (modeClass === MOON_CLASS) {
-            setModeClass(SUN_CLASS);
-        } else {
-            setModeClass(MOON_CLASS);
-        }
+        const newModeClass = modeClass === MOON_CLASS ? SUN_CLASS : MOON_CLASS;
+        setModeClass(newModeClass);
         document.body.classList.toggle("dark-mode");
     };
-    const gotoTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
+
+    const gotoTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
     useMount(() => {
-        new window["QRCode"](
-            document.getElementById("qrcode"),
-            // eslint-disable-next-line no-restricted-globals
-            location.href,
-            {
-                width: 50,
-                height: 50,
-            },
-        );
+        new window["QRCode"](document.getElementById("qrcode"), window.location.href, {
+            width: 50,
+            height: 50,
+        });
     });
-    const showQrCode = () => {
-        document.getElementById("qrcode").classList.toggle("hide-qrcode");
-    };
+
+    const showQrCode = () => document.getElementById("qrcode").classList.toggle("hide-qrcode");
+
     const commonStyle = {
         color: modeClass === SUN_CLASS ? "#000" : "#fff",
         position: "fixed",
@@ -52,6 +41,17 @@ export default function AppHeader() {
         userSelect: "none",
         zIndex: 999,
     };
+
+    const HeaderIcon = ({ action, icon, bottom }) => (
+        <span
+            className="material-symbols-outlined"
+            onClick={action}
+            style={{ bottom: `${bottom}%`, ...commonStyle }}
+        >
+            {icon}
+        </span>
+    );
+
     return (
         <header className="App-header">
             <div className="App-header-left" onClick={redirect}>
@@ -59,43 +59,12 @@ export default function AppHeader() {
                 <label className="App-header-title">Hacker Pot</label>
             </div>
             <div className="App-header-right">
-                <span
-                    className="material-symbols-outlined"
-                    style={{
-                        bottom: "50%",
-                        ...commonStyle,
-                    }}
-                    onClick={gotoTop}
-                >
-                    arrow_circle_up
-                </span>
-                <span
-                    className="material-symbols-outlined"
-                    onClick={toggleMode}
-                    style={{
-                        bottom: "45%",
-                        ...commonStyle,
-                    }}
-                >
-                    {modeClass}
-                </span>
-                <div
-                    style={{
-                        bottom: "55%",
-                        ...commonStyle,
-                    }}
-                    className="qrcode-box"
-                >
-                    <span
-                        className="material-symbols-outlined"
-                        onClick={showQrCode}
-                        style={{ position: "relative" }}
-                    >
-                        qr_code_2
-                        <div className="qrcode hide-qrcode" id="qrcode"></div>
-                    </span>
+                <HeaderIcon action={gotoTop} icon="arrow_circle_up" bottom="50" />
+                <HeaderIcon action={toggleMode} icon={modeClass} bottom="45" />
+                <div style={{ bottom: "55%", ...commonStyle }} className="qrcode-box">
+                    <HeaderIcon action={showQrCode} icon="qr_code_2" bottom="55" />
+                    <div className="qrcode hide-qrcode" id="qrcode"></div>
                 </div>
-
                 <span
                     className="material-symbols-outlined"
                     style={{ color: "#fff", cursor: "pointer" }}

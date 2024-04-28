@@ -1,56 +1,47 @@
-import AppHeader from "../components/AppHeader";
-import Article from "../components/Article";
-import Catalog from "../components/Catalog";
-import { articles } from "../articles";
-import { useParams } from "react-router-dom";
-import "./Post.css";
-import { useMount, useTitle } from "react-use";
-import { createRoot } from "react-dom/client";
-import { useEffect } from "react";
-import { useComment } from "../utils";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react'
+import { createRoot } from 'react-dom/client';
+import { useTitle } from 'react-use';
+import AppHeader from '../components/AppHeader';
+import Article from '../components/Article';
+import Catalog from '../components/Catalog';
+import { articles } from '../articles';
+import { useComment } from '../utils';
+import './Post.css';
 
-function useAnchors(titles) {
-    useMount(() => {
-        if (document.body.querySelector(".catalog")) {
-            return;
-        }
-        const mountPoint = document.createElement("div");
-        mountPoint.classList.add("catalog");
-        createRoot(mountPoint).render(<Catalog titles={titles} />);
+function useArticle(postId) {
+    return articles.find((item) => item.id === postId);
+}
+
+function useCatalog(titles) {
+    useEffect(() => {
+        const mountPoint = document.createElement('div');
+        mountPoint.classList.add('catalog');
         document.body.appendChild(mountPoint);
+        createRoot(mountPoint).render(<Catalog titles={titles} />);
+
+        return () => {
+            document.body.removeChild(mountPoint);
+        };
     });
 }
 
 export default function Post() {
     const { postId } = useParams();
-    const article = articles.find((item) => item.id === postId);
+    const article = useArticle(postId);
     useTitle(article.title);
-    const titles = article.chapters.map((c) => c.title);
-    titles.unshift(article.title);
-    useAnchors(titles);
-    useEffect(() => {
-        return () => {
-            const mountPoint = document.body.querySelector(".catalog");
-            if (mountPoint) {
-                document.body.removeChild(mountPoint);
-            }
-        };
-    }, []);
-
-    useComment()
+    const titles = [article.title, ...article.chapters.map((c) => c.title)];
+    useCatalog(titles);
+    useComment();
 
     return (
         <div className="Post">
             <AppHeader />
-            <main
-                style={{
-                    padding: 12,
-                    display: "flex",
-                    justifyContent: "center",
-                }}
-            >
+            <main style={{ padding: 12, display: 'flex', justifyContent: 'center' }}>
                 <Article {...article} />
             </main>
         </div>
     );
 }
+
