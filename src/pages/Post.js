@@ -7,6 +7,7 @@ import "./Post.css";
 import { useMount, useTitle } from "react-use";
 import { createRoot } from "react-dom/client";
 import { useEffect } from "react";
+import { useComment } from "../utils";
 
 function useAnchors(titles) {
     useMount(() => {
@@ -35,6 +36,9 @@ export default function Post() {
             }
         };
     }, []);
+
+    useComment()
+
     return (
         <div className="Post">
             <AppHeader />

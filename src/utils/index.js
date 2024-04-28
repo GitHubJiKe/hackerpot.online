@@ -1,5 +1,7 @@
 import axios from "axios";
 import fileSaver from "file-saver";
+import { useEffect } from 'react'
+
 
 export async function getGeo() {
     return new Promise((resolve, reject) => {
@@ -53,4 +55,35 @@ export async function copyText(text) {
     } catch (err) {
         return Promise.resolve(false);
     }
+}
+
+
+export function useComment() {
+    // <script src="https://utteranc.es/client.js" repo="GitHubJiKe/hackerpot-comments" issue-term="pathname"
+    // theme="preferred-color-scheme" crossorigin="anonymous" async>
+    // </script>
+    useEffect(() => {
+        if (document.body.querySelector('#comment')) {
+            return;
+        }
+        const script = document.createElement('script')
+        script.id = 'comment'
+        script.src = 'https://utteranc.es/client.js'
+        script.crossOrigin = 'anonymous'
+        script.setAttribute('repo', 'GitHubJiKe/hackerpot-comments')
+        script.setAttribute('issue-term', 'pathname')
+        script.setAttribute('theme', 'preferred-color-scheme')
+        script.setAttribute('async', 'true')
+        document.body.appendChild(script)
+        return () => {
+            if (script && script.parentElement) {
+                script.parentElement.removeChild(script)
+            }
+            const commentBox = document.body.querySelector('.utterances')
+            if (commentBox) {
+                document.body.removeChild(commentBox)
+            }
+        }
+    }, [])
+
 }
