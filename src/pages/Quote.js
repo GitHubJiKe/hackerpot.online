@@ -7,8 +7,6 @@ function formatterQuote(text) {
     return text.replace(/\n/g, "<br/>");
 }
 
-const BG_URL =
-    "https://bucket2023.oss-cn-hangzhou.aliyuncs.com/mihua/images/mihuan1.jpg";
 
 function getBgUrl(num = 1) {
     return `https://bucket2023.oss-cn-hangzhou.aliyuncs.com/mihua/images/mihuan${num}.jpg`;

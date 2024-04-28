@@ -2,10 +2,12 @@ import "./App.css";
 import AppContent from "../components/AppContent";
 import AppHeader from "../components/AppHeader";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 import { articles } from "../articles";
 import Weather from "../components/Weather";
 import { useTitle } from "react-use";
+
 const filterFun = (item) => {
     if (window.location.origin.includes("localhost")) {
         return true;
@@ -15,6 +17,16 @@ const filterFun = (item) => {
 };
 function App() {
     useTitle("骇客地锅");
+    useEffect(() => {
+        const comment = document.body.querySelector('.utterances')
+        if (comment) {
+            comment.style.display = 'none'
+        }
+
+        return () => {
+            comment && (comment.style.display = '');
+        }
+    }, [])
     return (
         <div className="App">
             <AppHeader />
