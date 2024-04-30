@@ -1,15 +1,12 @@
 import { useRef, useState, useCallback } from "react";
 import "./Quote.css";
 import html2canvas from "html2canvas";
-import { downloadImageByUrlAndName } from "../utils";
+import { downloadImageByUrlAndName, getBgUrl } from "../utils";
 
 function formatterQuote(text) {
     return text.replace(/\n/g, "<br/>");
 }
 
-function getBgUrl(num = 1) {
-    return `//bucket2023.oss-cn-hangzhou.aliyuncs.com/mihua/images/mihuan${num}.jpg`;
-}
 function loadImage(url) {
     return new Promise(function (resolve, reject) {
         const img = new Image();

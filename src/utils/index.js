@@ -1,7 +1,6 @@
 import axios from "axios";
 import fileSaver from "file-saver";
-import { useEffect } from 'react'
-
+import { useEffect } from "react";
 
 export const getGeo = () =>
     new Promise((resolve, reject) => {
@@ -12,7 +11,6 @@ export const getGeo = () =>
 
         navigator.geolocation.getCurrentPosition(resolve, reject);
     });
-
 
 function getLocationStr({ latitude, longitude }) {
     return `${longitude.toString().replace(/-/g, "")},${latitude}`;
@@ -54,33 +52,36 @@ export async function copyText(text) {
     }
 }
 
-
-
+export function getBgUrl(num = 1) {
+    return `//bucket2023.oss-cn-hangzhou.aliyuncs.com/mihua/images/mihuan${num}.jpg`;
+}
 
 export function useComment() {
     useEffect(() => {
-        const commentId = '#comment';
+        const commentId = "#comment";
         const existingScript = document.body.querySelector(commentId);
 
         if (existingScript) return;
 
         const scriptAttributes = {
-            id: 'comment',
-            src: 'https://utteranc.es/client.js',
-            crossOrigin: 'anonymous',
-            repo: 'GitHubJiKe/hackerpot-comments',
-            'issue-term': 'pathname',
-            theme: 'preferred-color-scheme',
-            async: 'true',
+            id: "comment",
+            src: "https://utteranc.es/client.js",
+            crossOrigin: "anonymous",
+            repo: "GitHubJiKe/hackerpot-comments",
+            "issue-term": "pathname",
+            theme: "preferred-color-scheme",
+            async: "true",
         };
 
-        const script = document.createElement('script');
-        Object.entries(scriptAttributes).forEach(([key, value]) => script.setAttribute(key, value));
+        const script = document.createElement("script");
+        Object.entries(scriptAttributes).forEach(([key, value]) =>
+            script.setAttribute(key, value),
+        );
         document.body.appendChild(script);
 
         return () => {
             script.remove();
-            const commentBox = document.body.querySelector('.utterances');
+            const commentBox = document.body.querySelector(".utterances");
             commentBox?.remove();
         };
     }, []);
