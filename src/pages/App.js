@@ -5,12 +5,11 @@ import AppContent from "../components/AppContent";
 import AppHeader from "../components/AppHeader";
 import Weather from "../components/Weather";
 import { articles } from "../articles";
-import { isUndefined } from "lodash-es";
 import QuoteCard from "../components/QuoteCard";
 
 const isLocalhost = () => window.location.origin.includes("localhost");
 const shouldDisplayArticle = (item) =>
-    isLocalhost() || !item.title.toLowerCase().includes("test");
+    isLocalhost() || !(item.title || "").toLowerCase().includes("test");
 const isQuote = (item) => item.type === "quoteCard";
 export default function App() {
     useTitle("骇客地锅");
