@@ -41,7 +41,8 @@ body {
     white-space: nowrap;
 }
 
-.inline-highlight {
+.inline-highlight,
+strong {
     color: #f43f5e;
     font-weight: 600;
 }

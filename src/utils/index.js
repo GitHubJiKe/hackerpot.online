@@ -86,3 +86,10 @@ export function useComment() {
         };
     }, []);
 }
+
+export function mdParse(content = "") {
+    console.log(22222);
+    const md = window.markdownit();
+    console.log(md);
+    return md.render(content);
+}

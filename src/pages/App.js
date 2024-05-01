@@ -25,7 +25,9 @@ export default function App() {
                     {articles.filter(shouldDisplayArticle).map((item, idx) => {
                         if (isQuote(item)) {
                             return (
-                                <QuoteCard key={idx}>{item.content}</QuoteCard>
+                                <QuoteCard key={idx} bgId={item.bgId}>
+                                    {item.content}
+                                </QuoteCard>
                             );
                         }
 
