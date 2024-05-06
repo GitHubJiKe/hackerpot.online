@@ -13,6 +13,7 @@ pre,
 code {
     border-radius: 1.2rem;
 }
+
 .banner {
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,19 +31,23 @@ code {
     .banner {
         height: 9rem !important;
     }
+
     iframe[type="website"] {
         /* display: none !important; */
     }
 }
+
 .content {
     padding: 1.2rem;
 }
+
 .time {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.time > div {
+
+.time>div {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -52,6 +57,7 @@ code {
     text-align: center;
     margin: 1.2rem 0;
 }
+
 .button {
     outline: none;
     border: none;
@@ -71,7 +77,6 @@ code {
     overflow: hidden;
     line-clamp: 3;
     -webkit-line-clamp: 3;
-    white-space: pre-wrap;
 }
 
 h1 {
@@ -94,7 +99,6 @@ hr {
 
 .article-full {
     height: max-content;
-    white-space: pre-wrap;
 }
 
 .article img {
