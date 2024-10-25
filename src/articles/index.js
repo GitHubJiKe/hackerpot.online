@@ -11,6 +11,7 @@ import article_30_04_2024 from "./30_04_2024";
 import article_01_05_2024 from "./01_05_2024";
 import article_06_05_2024 from "./06_05_2024";
 import article_25_05_2024 from "./25_05_2024";
+import article_24_10_2024 from "./24_10_2024";
 
 export const articles = [
     article_15_04_2024,
@@ -26,4 +27,5 @@ export const articles = [
     article_01_05_2024,
     article_06_05_2024,
     article_25_05_2024,
+    article_24_10_2024,
 ];
