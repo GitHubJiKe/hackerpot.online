@@ -1,6 +1,7 @@
 import "./Article.css";
 import defaultBanner from "../assets/banner.jpg";
 import { mdParse, removeAllSpace } from "../utils";
+import MindMap from "./MindMap";
 
 const Banner = ({ banner }) => (
     <div className="banner" style={{ backgroundImage: `url(${banner})` }}></div>
@@ -32,7 +33,15 @@ export default function Article({
     chapters,
     datetime,
     time2read,
+    type,
+    nodes,
+    edges,
 }) {
+    const isMindMap = type === "mindmap";
+
+    const mindMap = <MindMap nodes={nodes} edges={edges} />;
+
+    console.log(isMindMap, nodes, edges);
     return (
         <div className="Article">
             <Banner banner={banner} />
@@ -45,14 +54,17 @@ export default function Article({
                     {title}
                 </h1>
                 <div className="article-full">
-                    {chapters.map((item, idx) => (
-                        <Chapter
-                            key={idx}
-                            title={item.title}
-                            content={item.content}
-                            format={item.format}
-                        />
-                    ))}
+                    {isMindMap && mindMap}
+                    {chapters &&
+                        chapters.length &&
+                        chapters.map((item, idx) => (
+                            <Chapter
+                                key={idx}
+                                title={item.title}
+                                content={item.content}
+                                format={item.format}
+                            />
+                        ))}
                 </div>
             </div>
         </div>

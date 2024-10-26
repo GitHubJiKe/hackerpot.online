@@ -54,3 +54,7 @@ blockquote {
 .dark-mode blockquote {
     color: rgba(255, 255, 255, 0.5);
 }
+
+.react-flow__controls-button {
+    color: #252a34 !important;
+}

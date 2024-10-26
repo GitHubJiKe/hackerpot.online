@@ -6,11 +6,13 @@ import AppHeader from "../components/AppHeader";
 import Weather from "../components/Weather";
 import { articles } from "../articles";
 import QuoteCard from "../components/QuoteCard";
+import { createContext, useState } from "react";
 
 const isLocalhost = () => window.location.origin.includes("localhost");
 const shouldDisplayArticle = (item) =>
     isLocalhost() || !(item.title || "").toLowerCase().includes("test");
 const isQuote = (item) => item.type === "quoteCard";
+
 export default function App() {
     useTitle("骇客地锅");
 
@@ -25,7 +27,11 @@ export default function App() {
                     {articles.filter(shouldDisplayArticle).map((item, idx) => {
                         if (isQuote(item)) {
                             return (
-                                <QuoteCard key={idx} bgId={item.bgId} time={item.id}>
+                                <QuoteCard
+                                    key={idx}
+                                    bgId={item.bgId}
+                                    time={item.id}
+                                >
                                     {item.content}
                                 </QuoteCard>
                             );
