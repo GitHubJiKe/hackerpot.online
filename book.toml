@@ -1,7 +1,0 @@
-[book]
-authors = ["peteryuan"]
-language = "en"
-src = "src"
-title = "HackerPot·骇客地锅"
-[output.html.playground]
-editable = true
